@@ -9,3 +9,4 @@ shinylive
 shinywidgets
 ipyleaflet
 shinyswatch
+matplotlib
