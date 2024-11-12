@@ -10,3 +10,4 @@ shinywidgets
 ipyleaflet
 shinyswatch
 matplotlib
+websockets==10.4
