@@ -53,3 +53,19 @@ git add .
 git commit -m "Your commit message"
 
 git push -u origin main
+
+## Change the Browser Tab Title
+open the new docs folder. Edit docs/index.html - find the line that has the <title> and </title> opening and closing tags. The inner text between these two tags will appear in your tab.
+
+<title>PyShiny Penguins</title>
+
+## Add a Custom Favicon
+Add your own custom favicon  (the little icon that appears in the web browser tab) next to the title. Try https://favicon.io/Links to an external site. and create a favicon
+
+Download the zip file and extract the files. Take just the favicon.ico file and paste it into your docs folder.  Two changes are required:
+
+Confirm there is a favicon.ico in your docs folder. 
+Edit docs/index.html -  Just below the title line, add the following link tag like so. This code is the same for all of us - only the favicon appearance is different. If your favicon.ico has a different name or path, let VS Code help you provide the correct path. 
+
+<title>PyShiny Penguins</title>
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
