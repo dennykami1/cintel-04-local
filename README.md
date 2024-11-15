@@ -45,3 +45,11 @@ shinylive export penguins docs
 ## Run the following to serve the app:
 
 py -m http.server --directory docs --bind localhost 8008
+
+## Git Add / Commit / Push to GitHub
+
+git add .
+
+git commit -m "Your commit message"
+
+git push -u origin main
