@@ -31,3 +31,17 @@ py -m venv .venv
 py -m pip install --upgrade pip setuptools
 
 py -m pip install --upgrade -r requirements.txt
+
+## Run the App
+
+shiny run --reload --launch-browser penguins/app.py
+
+
+## ShinyLive export to build the app in the penguins folder to the docs folder:
+
+shiny static-assets remove
+shinylive export penguins docs
+
+## Run the following to serve the app:
+
+py -m http.server --directory docs --bind localhost 8008
