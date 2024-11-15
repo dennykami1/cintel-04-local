@@ -410,12 +410,14 @@ def server(input, output, session):
     @output
     @render.data_frame
     def penguins_df():
-        return filtered_data()
+        filtered_penguins = filtered_data()
+        return render.DataGrid(filtered_penguins)
 
     @output
     @render.data_frame  
     def penguins_dt():
-        return filtered_data()
+        filtered_penguins = filtered_data()
+        return render.DataTable(filtered_penguins)
 
 # --------------------------------------------------------
 # Reactive calculations and effects
