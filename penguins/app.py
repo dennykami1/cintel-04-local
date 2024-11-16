@@ -172,57 +172,80 @@ app_ui = ui.page_fluid(
             ),
             ui.page_fillable(
                 ui.card(
-                    ui.card_header("Interactive Histograms in PyShiny with Seaborn and Plotly", style="background-color: #8ecae6; color: #14213d;"),
+                    ui.card_header("Interactive Histograms in PyShiny with Seaborn and Plotly",
+                    style="background-color: #8ecae6; color: #14213d; font-size: 22px;"),
                     ui.layout_columns(
-                        ui.card(
-                            ui.h3("Seaborn Histogram"),
-                            ui.output_plot("plot"),     
+                        ui.div(
+                            ui.card(
+                                ui.h4("Seaborn Histogram"),
+                                ui.output_plot("plot"),
+                                style="background-color: #e3f2fd;"     
+                            ),
                         ),
-                        ui.card(
-                            ui.h3("Plotly Histogram"),
-                            output_widget("penguins_histogram"),  # Output widget for histogram
-                            full_screen=True  # Make inner card full-screen width
-                        )
+                        ui.div(
+                            ui.card(
+                                ui.h4("Plotly Histogram"),
+                                output_widget("penguins_histogram"),  # Output widget for histogram
+                                full_screen=True,  # Make inner card full-screen width
+                                style="background-color: #e3f2fd;"
+                            ),
+                        ),
                     ),
-                    class_="custom-border-card"  # Apply custom border class to this card only
+                    class_="custom-border-card",  # Apply custom border class to this card only
+                    style="background-color: #8ecae6;"
                 ),
                 full_screen=True  # Make inner card full-screen width
             ),
             ui.card(
-                ui.card_header("Scatter Plot using Plotly & Interactive Map using ipyleaflet", style="background-color: #8ecae6; color: #14213d;"),
+                ui.card_header("Scatter Plot using Plotly & Interactive Map using ipyleaflet",
+                style="background-color: #8ecae6; color: #14213d; font-size: 22px;"),
                 ui.layout_columns(
-                    ui.card(
-                        ui.h3("Plotly Scatter Plot"),
-                        output_widget("penguins_scatter_plot"),
+                    ui.div(
+                        ui.card(
+                            ui.h4("Plotly Scatter Plot"),
+                            output_widget("penguins_scatter_plot"),
+                            full_screen=True,
+                            style="background-color: #e3f2fd;"
+                        ),
                     ),
-                    ui.card(
-                        ui.input_select("center", "Select Island", choices=list(island_coordinates.keys())),
-                        output_widget("map"),             
-                        full_screen=True,  # Make inner card full-screen width
-                    )
+                    ui.div(
+                        ui.card(
+                            ui.input_select("center", "Select Island", choices=list(island_coordinates.keys())),
+                            output_widget("map"),             
+                            full_screen=True,  # Make inner card full-screen width
+                            style="background-color: #e3f2fd;"
+                        ),
+                    ),
                 ),     
-                class_="custom-border-card"  # Apply custom border class to this card only
+                class_="custom-border-card",  # Apply custom border class to this card only
+                style="background-color: #8ecae6;"
             ), 
             ui.card(
-                ui.card_header("Palmer Penguins Data Frame & Data Grid", style="background-color: #8ecae6; color: #14213d;"),
+                ui.card_header("Palmer Penguins Data Frame & Data Grid",
+                style="background-color: #8ecae6; color: #14213d; font-size: 22px;"),
                 ui.layout_columns(
                     ui.card(
                         ui.column(
-                            11,
-                            ui.h2("Data Frame"),
-                            ui.output_data_frame("penguins_df")
-                        )
+                            12,
+                            ui.h4("Data Frame"),
+                            ui.output_data_frame("penguins_df"),
+                            style="background-color: transparent;"
+                        ),
+                        style="background-color: #e3f2fd;"
                     ),
                     ui.card(
                         ui.column(
-                            11,
-                            ui.h2("Data Table"),
-                            ui.output_data_frame("penguins_dt")
-                        )
-                    )
+                            12,
+                            ui.h4("Data Table"),
+                            ui.output_data_frame("penguins_dt"),
+                            style="background-color: #e3f2fd;"
+                        ),
+                        style="background-color: #e3f2fd;"
+                    ),
                 ),
                 class_="custom-border-card",  # Apply custom border class to this card only
-                full_screen=True  # Outer card full-screen width
+                full_screen=True,  # Outer card full-screen width
+                style="background-color: #8ecae6;"
             ),
             ui.div(
                 ui.h4("Author: Kami Denny"),
@@ -230,7 +253,7 @@ app_ui = ui.page_fluid(
             ),
         ),
         full_screen=True,  # Outer card full-screen width
-        style="padding: 20px;"
+        style="padding: 20px;background-color: #c6ddf0;"
     ),
     theme=shinyswatch.theme.lumen
 )
@@ -273,6 +296,8 @@ def server(input, output, session):
     
     @render.plot(alt="A Seaborn histogram on penguin data.")  
     def plot():
+        plt.figure(facecolor='#e3f2fd')
+        plt.gca().set_facecolor('#e3f2fd')
         selected_display_name = input.selected_attribute()
         selected_column = column_choices[selected_display_name]
         selected_species = input.selected_species_mc()
@@ -364,8 +389,15 @@ def server(input, output, session):
                 title={"text": f"Penguin {input.x_column()} Distribution by Species", "x": 0.5},
                 yaxis_title="Count",
                 xaxis_title=input.x_column(),
+                plot_bgcolor='#e3f2fd',
+                paper_bgcolor='#e3f2fd',
+                yaxis=dict(
+                    showgrid=True,  # Show x-axis grid lines
+                    gridcolor='#a9aca9',  # Color of x-axis grid lines
+                    gridwidth=1  # Width of x-axis grid lines
+                ),
             )
-
+            
         return histogram 
     
     @render_widget 
@@ -390,6 +422,18 @@ def server(input, output, session):
             title={"text": f"{input.x_column_scatter()} vs {input.y_column_scatter()}", "x": 0.5},
             yaxis_title=input.y_column_scatter(),
             xaxis_title=input.x_column_scatter(),
+            plot_bgcolor='#e3f2fd',
+            paper_bgcolor='#e3f2fd',
+            xaxis=dict(
+                showgrid=True,  # Show x-axis grid lines
+                gridcolor='#b1b1b1',  # Color of x-axis grid lines
+                gridwidth=1  # Width of x-axis grid lines
+            ),
+            yaxis=dict(
+                showgrid=True,  # Show y-axis grid lines
+                gridcolor='#b1b1b1',  # Color of y-axis grid lines
+                gridwidth=1  # Width of y-axis grid lines
+            )
         )
 
         return scatterplot
