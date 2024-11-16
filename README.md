@@ -69,3 +69,5 @@ Edit docs/index.html -  Just below the title line, add the following link tag li
 
 <title>PyShiny Penguins</title>
 <link rel="icon" type="image/x-icon" href="./favicon.ico">
+
+END
